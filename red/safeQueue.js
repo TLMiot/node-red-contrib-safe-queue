@@ -339,6 +339,21 @@ module.exports = function (RED) {
                         if (itemQueue.resend <= node.retryTimeout) {
                             node.transmitMessage(itemQueue);
                             return;
+                        } else {
+                          node.storage.getMessage(itemQueue.keyMessage, (err, data) => {
+                              if (err) {
+                                  node.error(`${RED._("safe-queue.message-errors.fail-read-message")}: ${itemQueue.keyMessage}`);
+                                  return;
+                              }
+
+                              let itemMessage = {};
+                              itemMessage.keyMessage = data.uuid;
+                              itemMessage.message = data.message;
+
+                              node.messageProcess.set(itemMessage.keyMessage, itemMessage);
+
+                              itemQueue.nodeOut.sendErrorMessage(data.message);
+                          });
                         }
 
                         break;
@@ -591,7 +606,11 @@ module.exports = function (RED) {
         };
 
         node.sendMessage = function sendMessage(message) {
-            node.send(message);
+            node.send([message, null]);
+        };
+
+        node.sendErrorMessage = function sendErrorMessage(message) {
+            node.send([null, message]);
         };
     }
 

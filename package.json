@@ -1,5 +1,5 @@
 {
-  "name": "node-red-contrib-safe-queue",
+  "name": "node-red-contrib-safe-queue-tlm",
   "version": "1.2.2",
   "description": "A Node-RED node Safe Queue",
   "main": "index.js",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/netsmarttech/node-red-contrib-safe-queue.git"
+    "url": "git+https://github.com/TLMiot/node-red-contrib-safe-queue-tlm.git"
   },
   "bugs": {
-    "url": "https://github.com/netsmarttech/node-red-contrib-safe-queue/issues"
+    "url": "https://github.com/TLMiot/node-red-contrib-safe-queue-tlm/issues"
   },
   "keywords": [
     "node-red"
